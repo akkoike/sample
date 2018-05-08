@@ -7,13 +7,13 @@ then
 fi
 
 JSON_OBJ=`/usr/bin/curl http://169.254.169.254/metadata/scheduledevents?api-version=2017-08-01`
-FLG=`echo ${JSON_OBJ} | /usr/bin/jq ".Event"`
+FLG=`echo ${JSON_OBJ} | /usr/bin/jq ".Events[]"`
 DocNum=`echo ${JSON_OBJ} | /usr/bin/jq ".DocumentIncarnation"`
 TIMESTAMPDATE=`date +%Y-%m-%d' '%H:%M:%S`
 YOURNODENAME=`/usr/bin/hostname`
 
 # checking the .Event is null or not
-if [ "${FLG}" = "null" ]
+if [ "${FLG}" = "" ]
 then
     /usr/bin/mysql -h metatestmysql.mysql.database.azure.com -u azure01@metatestmysql -pAkiraKoike7! --ssl-ca=/var/tmp/BaltimoreCyberTrustRoot.crt.pem instancemeta -e "insert into instancemetadata(targetnode,timestamp,documentincarnation) values('${YOURNODENAME}', '${TIMESTAMPDATE}', ${DocNum});"
 
