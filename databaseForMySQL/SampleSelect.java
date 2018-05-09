@@ -6,7 +6,7 @@ class SampleSelect {
         try {
             String url ="jdbc:mysql://metatestmysql.mysql.database.azure.com:3306/instancemeta?useSSL=true&requireSSL=false";
             String user = "azure01@metatestmysql";
-            String pass = "AkiraKoike7!";
+            String pass = "Passw@rd";
             myDbConn = DriverManager.getConnection(url, user, pass);
                 try {
                     String sqlquery = "select * from instancemetadata where timestamp like '2018-05-07%'";

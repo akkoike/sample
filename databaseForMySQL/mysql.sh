@@ -15,7 +15,7 @@ YOURNODENAME=`/usr/bin/hostname`
 # checking the .Event is null or not
 if [ "${FLG}" = "" ]
 then
-    /usr/bin/mysql -h metatestmysql.mysql.database.azure.com -u azure01@metatestmysql -pAkiraKoike7! --ssl-ca=/var/tmp/BaltimoreCyberTrustRoot.crt.pem instancemeta -e "insert into instancemetadata(targetnode,timestamp,documentincarnation) values('${YOURNODENAME}', '${TIMESTAMPDATE}', ${DocNum});"
+    /usr/bin/mysql -h metatestmysql.mysql.database.azure.com -u azure01@metatestmysql -pPassw@rd --ssl-ca=/var/tmp/BaltimoreCyberTrustRoot.crt.pem instancemeta -e "insert into instancemetadata(targetnode,timestamp,documentincarnation) values('${YOURNODENAME}', '${TIMESTAMPDATE}', ${DocNum});"
 
 else
     EVID=`echo ${JSON_OBJ} | /usr/bin/jq ".Events[].EventId" | cut -f2 -d"\""`
@@ -24,5 +24,5 @@ else
     RSTYPE=`echo ${JSON_OBJ} | /usr/bin/jq ".Events[].ResourceType" | cut -f2 -d"\""`
     RSOURCE=`echo ${JSON_OBJ} | /usr/bin/jq ".Events[].Resources[]" | cut -f2 -d"\""`
     NOTBEFORE=`echo ${JSON_OBJ} | /usr/bin/jq ".Events[].NotBefore" | cut -f2 -d"\""`
-    /usr/bin/mysql -h metatestmysql.mysql.database.azure.com -u azure01@metatestmysql -pAkiraKoike7! --ssl-ca=/var/tmp/BaltimoreCyberTrustRoot.crt.pem instancemeta -e "insert into instancemetadata(targetnode,timestamp,documentincarnation,eventid,eventstatus,eventtype,resourcetype,resources,notbefore) values('$YOURNODENAME', '${TIMESTAMPDATE}', ${DocNum}, '${EVID}', '${EVSTATUS}', '${EVTYPE}', '${RSTYPE}', '${RSOURCE}', '${NOTBEFORE}');"
+    /usr/bin/mysql -h metatestmysql.mysql.database.azure.com -u azure01@metatestmysql -pPassw@rd --ssl-ca=/var/tmp/BaltimoreCyberTrustRoot.crt.pem instancemeta -e "insert into instancemetadata(targetnode,timestamp,documentincarnation,eventid,eventstatus,eventtype,resourcetype,resources,notbefore) values('$YOURNODENAME', '${TIMESTAMPDATE}', ${DocNum}, '${EVID}', '${EVSTATUS}', '${EVTYPE}', '${RSTYPE}', '${RSOURCE}', '${NOTBEFORE}');"
 fi
